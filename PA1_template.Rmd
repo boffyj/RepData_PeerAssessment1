@@ -90,8 +90,7 @@ mean_day = mean(myData$steps)*nints
 med_day = median(myData$steps,na.rm=T)
 ```
 
-Using the imputed data, a mean of `r prettyNum(mean_day)` steps and 
-a median of `r prettyNum(med_day)` steps are taken on average per day. 
+Using the imputed data, a total of `r prettyNum(mean_day)` steps steps are taken on average per day. A median of `r prettyNum(med_day)` steps are taken.
 
 With the completed dataset, all `r mrows/nints` days that were previously missing now have a total of `r prettyNum(mean_day)` steps which is the average of the initital dataset. The resulting histogram shows that `r mrows/nints` days have been added to the bin containing the mean. 
 
@@ -109,10 +108,10 @@ myData$wd = factor(ifelse(weekdays(myData$date) %in% c("Saturday","Sunday"),"wee
 
 The results of step patterns by weekday/weekend are given below. The values are given as deviations from the respective means.
 
-```{r wdepanalplots,warning=FALSE,fig.width=10.5}
+```{r panalplot,fig.width=10.5}
 library(ggplot2)
 mean_wd = aggregate(steps~wd,myData,mean)
 mean_wd_int = aggregate(steps~wd+interval,myData,mean)
 mean_wd_int$steps = (mean_wd_int$steps - mean_wd$steps)
-qplot(interval,steps,data=mean_wd_int,facets=.~wd, geom=c("line","smooth"))
+qplot(interval,steps,data=mean_wd_int,facets=.~wd, geom=c("line","smooth"), method="loess")
 ```

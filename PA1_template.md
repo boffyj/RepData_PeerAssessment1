@@ -14,16 +14,16 @@ myData[sample(dim(myData)[1], 10), ]
 
 ```
 ##       steps       date interval
-## 6023      0 2012-10-21     2150
-## 1501      0 2012-10-06      500
-## 11302    NA 2012-11-09      545
-## 4296     17 2012-10-15     2155
-## 13620     0 2012-11-17      655
-## 11061     0 2012-11-08      940
-## 5685     38 2012-10-20     1740
-## 712       0 2012-10-03     1115
-## 3905      0 2012-10-14     1320
-## 2499     58 2012-10-09     1610
+## 4206      0 2012-10-15     1425
+## 8410      0 2012-10-30      445
+## 2943      0 2012-10-11      510
+## 11030     7 2012-11-08      705
+## 16659    10 2012-11-27     2010
+## 3032      0 2012-10-11     1235
+## 3365     15 2012-10-12     1620
+## 16375     0 2012-11-26     2030
+## 8481      0 2012-10-30     1040
+## 8245      0 2012-10-29     1500
 ```
 
   
@@ -129,8 +129,7 @@ med_day = median(myData$steps, na.rm = T)
 ```
 
 
-Using the imputed data, a mean of 10766 steps and 
-a median of 0 steps are taken on average per day. 
+Using the imputed data, a total of 10766 steps steps are taken on average per day. A median of 0 steps are taken.
 
 With the completed dataset, all 8 days that were previously missing now have a total of 10766 steps which is the average of the initital dataset. The resulting histogram shows that 8 days have been added to the bin containing the mean. 
 
@@ -158,13 +157,8 @@ mean_wd = aggregate(steps ~ wd, myData, mean)
 mean_wd_int = aggregate(steps ~ wd + interval, myData, mean)
 mean_wd_int$steps = (mean_wd_int$steps - mean_wd$steps)
 qplot(interval, steps, data = mean_wd_int, facets = . ~ wd, geom = c("line", 
-    "smooth"))
+    "smooth"), method = "loess")
 ```
 
-```
-## geom_smooth: method="auto" and size of largest group is <1000, so using loess. Use 'method = x' to change the smoothing method.
-## geom_smooth: method="auto" and size of largest group is <1000, so using loess. Use 'method = x' to change the smoothing method.
-```
-
-![plot of chunk wdepanalplots](figure/wdepanalplots.png) 
+![plot of chunk panalplot](figure/panalplot.png) 
 
